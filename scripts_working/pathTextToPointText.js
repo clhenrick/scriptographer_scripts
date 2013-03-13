@@ -3,8 +3,6 @@ Get selected PathText items and run toPointText
 
 TO DO:
    1. Keep text on same layer, it changes layers for some reason when running script text across multiple layers is selected.
-   2. Ignore PathText that isn't a straight line / that has handles
-      so that text that actually needs a path (ie on a curvy road) is preserved.
 ******************/
 
 var selectedItems = document.getItems({ 
@@ -12,17 +10,30 @@ var selectedItems = document.getItems({
     selected: true
 });
 
+// select only PathText that does not have handles
 for ( i=0;i<selectedItems.length;i++ ){
-//		if (selectedItems.textPath.segments[i].handleIn.length == 0 || selectedItems.textPath.segments.handleOut.length == 0){
-			
+    if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.length-1].handleIn.length==0){
+        if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.length-1].handleOut.length==0){
+           if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.length-2].handleIn.length==0){
+              if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.length-2].handleOut.length==0){
+                 if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.index=0].handleIn.length==0){
+                     if (selectedItems[i].textPath.segments[selectedItems[i].textPath.segments.index=0].handleOut.length==0){
+            
+            console.log(selectedItems[i].textPath.segments)
 			toPointText(selectedItems[i]);
-//			}
+			
+			            }
+			         }
+			      }
+			   }
+		    }
+	    }
 	}
 
-function toPointText(areaText){
+function toPointText(pathText){
 	
 	// copy the areatext to a new object
-	var text = areaText.clone();
+	var text = pathText.clone();
 	
 	//create two periods to measure the angle
 	text.content = "..";
@@ -38,15 +49,16 @@ function toPointText(areaText){
 	
 	//create PointText item and content
 	var pointText = new PointText(points.lastChild.bounds.center);
-	pointText.content = areaText.content;
+	pointText.content = pathText.visibleRange.content;
 	
 	//assign character and paragraph styles as well as offset
-	pointText.characterStyle = areaText.characterStyle;
-	pointText.paragraphStyle = areaText.paragraphStyle;
-	pointText.layer = areaText.layer;
-	pointText.paragraphStyle.maxLetterSpacing = areaText.paragraphStyle.maxLetterSpacing;
+	pointText.characterStyle = pathText.characterStyle;
+	pointText.paragraphStyle = pathText.paragraphStyle;
+	pointText.layer = pathText.layer;
+	pointText.paragraphStyle.maxLetterSpacing = pathText.paragraphStyle.maxLetterSpacing;
+	pointText.characterStyle.baselineShift = 0; //set baseline shift to 0 
 
-	//pointText.startOffset = areaText.startOffset; //doesn't seem to do anything...
+	//pointText.startOffset = pointText.startOffset; //doesn't seem to do anything...
 	
 	//rotate with respect to the first character
 	pointText.rotate(vector.angle, points.lastChild.bounds.center);
@@ -63,5 +75,5 @@ function toPointText(areaText){
 	
 	//clean up
 	points.remove();
-	areaText.remove();
+	pathText.remove();
 }
