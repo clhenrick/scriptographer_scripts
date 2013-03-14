@@ -60,5 +60,5 @@ function toPointText(pathText){
 	
 	//clean up
 	points.remove();
-	areaText.remove();
+	pathText.remove();
 }
