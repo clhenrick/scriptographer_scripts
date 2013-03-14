@@ -5,7 +5,7 @@ javascript for use with the Scriptographer plugin for Adobe Illustrator version 
 * Some of these scripts were developed with help from [Alex Blackwood](pxqxbxd@gmail.com)
 * The transFormEach.js script was created by [Shanfan Huang](http://shanfanhuang.com), the visual designer. 
 
-The scripts in this folder do the following:
+The scripts in the scripts_working folder do the following:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   -pathTextToPointText.js 
