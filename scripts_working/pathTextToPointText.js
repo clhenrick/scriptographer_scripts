@@ -1,8 +1,10 @@
 /******************
-Get selected PathText items and run toPointText
+Get selected PathText items that do not have handles on the path segment points and run toPointText
 
 TO DO:
    1. Keep text on same layer, it changes layers for some reason when running script text across multiple layers is selected.
+   2. possibly ignore pathText that has two or more segments with different angles?
+   3. Detach each word from path but keep in the same position.
 ******************/
 
 var selectedItems = document.getItems({ 
@@ -58,7 +60,7 @@ function toPointText(pathText){
 	pointText.paragraphStyle.maxLetterSpacing = pathText.paragraphStyle.maxLetterSpacing;
 	pointText.characterStyle.baselineShift = 0; //set baseline shift to 0 
 
-	//pointText.startOffset = pointText.startOffset; //doesn't seem to do anything...
+	pointText.startOffset = pathText.startOffset; 
 	
 	//rotate with respect to the first character
 	pointText.rotate(vector.angle, points.lastChild.bounds.center);
