@@ -1,9 +1,20 @@
-/*
+/*****************************************************
 
-takes a layer, duplicates it, renames it,
-and turns off original layer
+takes a selected layer, duplicates it, renames it,
+moves it below original layer, and turns off
+the original layer
 
-*/
+TO DO:
+make script iterate over all layers in the document
+so that multiple selected layers (or selected objects
+across multitple layers) can be duplicated with one run
+of the script
+
+eventually filter document layers so that only certain
+layers are duplicated based on name, and then have
+graphic styles applied to their children objects.
+
+*****************************************************/
 
 // get the selected items in the document
 var selItems = document.activeLayer.children;
