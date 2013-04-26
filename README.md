@@ -7,7 +7,10 @@ javascript for use with the Scriptographer plugin for Adobe Illustrator version 
 
 The scripts in the scripts_working folder do the following:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+  -copySelectedLayer.js
+     duplicates a selected layer in the document, renames the duplicate layer,
+     moves the duplicate layer below the original, and hides the original layer.
+     
   -pathTextToPointText.js 
      takes a selected text on a path and makes it point text. Ignores path text with handles so that 
      path text that truly needs to be on a path stays on a path.
